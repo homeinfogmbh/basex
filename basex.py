@@ -1,6 +1,6 @@
 """Encode non-negative integers to strings."""
 
-from typing import Iterable, Iterator
+from typing import Iterator
 
 
 __all__ = ['encode', 'decode']
@@ -49,7 +49,7 @@ def _encode(number: int, pool: str) -> Iterator[str]:
         yield pool[remainder]
 
 
-def _decode(code: str | Iterable[str], pool: str) -> Iterator[int]:
+def _decode(code: str, pool: str) -> Iterator[int]:
     """Decode a string into a non-negative integer."""
 
     base = len(pool)
