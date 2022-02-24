@@ -9,6 +9,12 @@ __all__ = ['encode', 'decode']
 def encode(number: int, pool: str) -> str:
     """Encode a non-negative integer as string."""
 
+    if not isinstance(number, int):
+        raise TypeError('Number must be of type int.')
+
+    if number < 0:
+        raise ValueError('Number must not be negative,')
+
     if not _has_unique_elements(pool):
         raise ValueError('Pool elements must be unique.')
 
