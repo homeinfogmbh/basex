@@ -30,7 +30,7 @@ def decode(code: str, pool: str) -> int:
 def _has_unique_elements(pool: str) -> bool:
     """Validates that the pool elements are unique."""
 
-    return len(pool) != len(set(pool))
+    return len(pool) == len(set(pool))
 
 
 def _encode(number: int, pool: str) -> Iterator[str]:
