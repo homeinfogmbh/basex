@@ -9,7 +9,8 @@ __all__ = ['encode', 'decode']
 def encode(number: int, pool: str) -> str:
     """Encode a non-negative integer as string."""
 
-    _validate_pool(pool)
+    if not _has_unique_elements(pool):
+        raise ValueError('Pool elements must be unique.')
 
     if number == 0:
         return pool[0]
@@ -20,15 +21,16 @@ def encode(number: int, pool: str) -> str:
 def decode(code: str, pool: str) -> int:
     """Decode a string into a non-negative integer."""
 
-    _validate_pool(pool)
+    if not _has_unique_elements(pool):
+        raise ValueError('Pool elements must be unique.')
+
     return sum(_decode(code, pool))
 
 
-def _validate_pool(pool: str) -> None:
+def _has_unique_elements(pool: str) -> bool:
     """Validates that the pool elements are unique."""
 
-    if len(pool) != len(set(pool)):
-        raise ValueError('Pool elements must be unique.')
+    return len(pool) != len(set(pool))
 
 
 def _encode(number: int, pool: str) -> Iterator[str]:
