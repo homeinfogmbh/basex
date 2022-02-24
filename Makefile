@@ -1,20 +1,28 @@
 FILE_LIST = ./.installed_files.txt
 
-.PHONY: pull push clean install uninstall
+.PHONY: build clean install publish pull push uninstall
+
+build:
+	@ python ./setup.py sdist bdist_wheel
+
+clean:
+	@ rm -Rf ./build ./dist
 
 default: | pull clean install
 
 install:
-	@ ./setup.py install --record $(FILE_LIST)
+	@ python ./setup.py install --record $(FILE_LIST)
 
-uninstall:
-	@ while read FILE; do echo "Removing: $$FILE"; rm "$$FILE"; done < $(FILE_LIST)
-
-clean:
-	@ rm -Rf ./build
+publish:
+	@ twine upload dist/*
 
 pull:
 	@ git pull
 
 push:
 	@ git push
+
+pypi: | clean build publish
+
+uninstall:
+	@ while read FILE; do echo "Removing: $$FILE"; rm "$$FILE"; done < $(FILE_LIST)
