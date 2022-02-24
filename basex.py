@@ -9,6 +9,9 @@ __all__ = ['encode', 'decode']
 def encode(number: int, pool: str) -> str:
     """Encode a non-negative integer as string."""
 
+    if number == 0:
+        return pool[0]
+
     return ''.join(_encode(number, pool))
 
 
@@ -20,10 +23,6 @@ def decode(code: str, pool: str) -> int:
 
 def _encode(number: int, pool: str) -> Iterator[str]:
     """Encode a non-negative integer as string."""
-
-    if number == 0:
-        yield pool[0]
-        return
 
     base = len(pool)
 
