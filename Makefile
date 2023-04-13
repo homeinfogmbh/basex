@@ -2,16 +2,16 @@ FILE_LIST = ./.installed_files.txt
 
 .PHONY: build clean install publish pull push uninstall
 
+default: | pull clean install
+
 build:
 	@ python ./setup.py sdist bdist_wheel
 
 clean:
 	@ rm -Rf ./build ./dist
 
-default: | pull clean install
-
 install:
-	@ python ./setup.py install --record $(FILE_LIST)
+	@ ./setup.py install --record $(FILE_LIST)
 
 publish:
 	@ twine upload dist/*
