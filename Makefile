@@ -5,7 +5,7 @@ FILE_LIST = ./.installed_files.txt
 default: | pull clean install
 
 build:
-	@ python ./setup.py sdist bdist_wheel
+	@ ./setup.py sdist bdist_wheel
 
 clean:
 	@ rm -Rf ./build ./dist
