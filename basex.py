@@ -40,7 +40,7 @@ def _has_unique_elements(pool: str) -> bool:
 
 
 def _encode(number: int, pool: str) -> Iterator[str]:
-    """Encode a non-negative integer as string."""
+    """Encode a positive integer as string."""
 
     base = len(pool)
 
