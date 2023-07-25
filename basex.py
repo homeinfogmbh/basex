@@ -3,32 +3,32 @@
 from typing import Iterator
 
 
-__all__ = ['encode', 'decode']
+__all__ = ["encode", "decode"]
 
 
 def encode(number: int, pool: str) -> str:
     """Encode a non-negative integer as string."""
 
     if not isinstance(number, int):
-        raise TypeError('Number must be of type int.')
+        raise TypeError("Number must be of type int.")
 
     if number < 0:
-        raise ValueError('Number must not be negative.')
+        raise ValueError("Number must not be negative.")
 
     if not _has_unique_elements(pool):
-        raise ValueError('Pool elements must be unique.')
+        raise ValueError("Pool elements must be unique.")
 
     if number == 0:
         return pool[0]
 
-    return ''.join(_encode(number, pool))
+    return "".join(_encode(number, pool))
 
 
 def decode(code: str, pool: str) -> int:
     """Decode a string into a non-negative integer."""
 
     if not _has_unique_elements(pool):
-        raise ValueError('Pool elements must be unique.')
+        raise ValueError("Pool elements must be unique.")
 
     return sum(_decode(code, pool))
 
@@ -55,4 +55,4 @@ def _decode(code: str, pool: str) -> Iterator[int]:
     base = len(pool)
 
     for index, char in enumerate(code):
-        yield pool.index(char) * (base ** index)
+        yield pool.index(char) * (base**index)
